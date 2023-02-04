@@ -1,0 +1,71 @@
+
+from tkinter import *
+
+root = Tk()
+
+root.geometry("750x750")
+#img=PhotoImage(file='f.jpg')
+#Providing title to the form
+root.title('smart attendance monitoring system')
+root.configure(bg='pink')
+
+#this creates 'Label' widget for Registration Form and uses place() method.
+label_0 =Label(root,text="smart attendance monitoring system", width=30,font=("bold",25))
+#place method in tkinter is  geometry manager it is used to organize widgets by placing them in specific position
+label_0.place(x=90,y=60)
+
+labele =Label(root,text="enrollment", width=20,font=("bold",15), fg="white" ,bg="black")
+labele.place(x=40,y=150)
+labele =Label(root,text="already enrolled", width=20,font=("bold",15), fg="white" ,bg="black")
+labele.place(x=480,y=150)
+
+#this creates 'Label' widget for Fullname and uses place() method.
+
+    
+    #place method in tkinter is  geometry manager it is used to organize widgets by placing them in specific position
+label_1 =Label(root,text="NAME", width=10  ,font=("bold",10))
+label_1.place(x=40,y=210) 
+entry_1=Entry(root)
+entry_1.pack()
+entry_1.place(x=150,y=210)
+
+
+label_3 =Label(root,text="Email", width=10,font=("bold",10))
+label_3.place(x=40,y=250)  
+entry_3=Entry(root)
+entry_3.pack()
+entry_3.place(x=150,y=250)
+
+label1 =Label(root,text="After set your poision", font=("bold",8),bg="pink")
+label1.place(x=40,y=300)
+label1 =Label(root,text="press 'Y' on your keyborad", font=("bold",8),bg="pink")
+label1.place(x=40,y=320)
+
+def enrol():
+    import enroll,emailing,recognition ,spreadsheet
+    print("enrolling the data")
+    print("your name is {}".format(entry_1.get()))
+    print("your email address is {}".format(entry_3.get()))
+    enroll.enroll_via_camera(entry_1.get(),entry_3.get())
+    
+
+def presenty():
+    import enroll,emailing,recognition ,spreadsheet
+    recognition.load_facial_encodings_and_names_from_memory()
+    #spreadsheet.mark_all_absent()
+    recognition.run_recognition()
+
+dwnd = PhotoImage(file=r'image')
+takeImg =Button(root,image=dwnd, command=enrol, width=50, height=50)
+takeImg.place(x=120, y=400)
+
+
+dwnd0= PhotoImage(file=r'image')
+trainImg =Button(root,image=dwnd0, command=presenty, width=50, height=50)
+trainImg.place(x=550, y=400)
+
+dwnd1 = PhotoImage(file=r'image')
+quitWindow =Button(root,image=dwnd1, command=root.destroy, width=80, height=57)
+quitWindow.place(x=350, y=500)
+#this will run the mainloop.
+root.mainloop()
