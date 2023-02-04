@@ -1,0 +1,6 @@
+import enroll,emailing,recognition ,spreadsheet
+def en(name1,email1):
+    print(name1)
+    enroll.enroll_via_camera(name1,email1)
+
+#spreadsheet.enroll_person_to_sheet('omkar','basargiomkar@gmail.com')
